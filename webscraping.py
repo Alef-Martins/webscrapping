@@ -5,7 +5,6 @@ from bs4 import BeautifulSoup
 classificação = []
 c = 1
 
-
 # Armazena a página web em uma variável
 response = requests.get('https://www.band.uol.com.br/esportes/automobilismo/formula-1/classificacao')
 
@@ -18,7 +17,8 @@ site = BeautifulSoup(content, 'html.parser')
 posição = site.find('table', attrs={'class': 'pilots table'})
 tabelas = posição.find_all('tr', attrs={'class': 'ng-star-inserted'})
 
-print(f'\033[32m\033[1m\033[4m|{"Pos":>4}| {"Piloto":<20}| {"País":<15}| {"Equipe":<20}| Pts   |\033[m')
+print(f'\033[1;4;32m '*75)
+print(f'\033[1;4;32m|{"Pos":>4}| {"Piloto":<20}| {"País":<15}| {"Equipe":<20}| Pts   |\033[m')
     
 for tabela in tabelas:
     tabelas = posição.find('tr', attrs={'class': 'ng-star-inserted'})
@@ -36,4 +36,3 @@ for tabela in tabelas:
     equipe = piloto.find('span', attrs={'class': 'brand ng-star-inserted'})
     print(f'\033[4m|{c:3}º| {nome.text:<20}| {país.text:<15}| {equipe.text:20}| {classificação[c-1]:6}|')
     c+=1
-
